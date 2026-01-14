@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    /* === BASE STYLES === */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    /* === EDITOR CONTAINER === */
+    #editor {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      font-family: "Consolas", "Courier New", monospace;
+      font-size: 14px;
+    }
+
+    /* === MAKE EDITOR LAYERS TRANSPARENT (for background image themes) === */
+    .ace_scroller {
+      background: transparent !important;
+    }
+    .ace_content {
+      background: transparent !important;
+    }
+
+    /* === LINE NUMBERS (GUTTER) === */
+    .ace_gutter {
+      background: rgba(30, 30, 30, 0.8) !important;
+      color: #888888 !important;
+      border-right: 1px solid #444444;
+    }
+    .ace_gutter-active-line {
+      background: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    /* === CURSOR === */
+    .ace_cursor {
+      border-left: 2px solid #ffffff !important;
+    }
+
+    /* === TEXT SELECTION === */
+    .ace_selection {
+      background: rgba(100, 100, 100, 0.4) !important;
+    }
+    .ace_selected-word {
+      background: rgba(100, 100, 100, 0.3) !important;
+      border: 1px solid #666666 !important;
+    }
+
+    /* === ACTIVE LINE HIGHLIGHT === */
+    .ace_marker-layer .ace_active-line {
+      background: rgba(255, 255, 255, 0.05) !important;
+    }
+
+    /* === SCROLLBAR === */
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(30, 30, 30, 0.5);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(100, 100, 100, 0.6);
+      border-radius: 5px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(120, 120, 120, 0.8);
+    }
+    ::-webkit-scrollbar-corner {
+      background: transparent;
+    }
+
+    /* === SYNTAX HIGHLIGHTING (Lua) === */
+    .ace_keyword { color: #569cd6 !important; }
+    .ace_string { color: #ce9178 !important; }
+    .ace_comment { color: #6a9955 !important; font-style: italic; }
+    .ace_function { color: #dcdcaa !important; }
+    .ace_constant.ace_numeric { color: #b5cea8 !important; }
+    .ace_constant.ace_language { color: #569cd6 !important; }
+    .ace_variable { color: #9cdcfe !important; }
+    .ace_operator { color: #d4d4d4 !important; }
+    .ace_paren { color: #ffd700 !important; }
+    .ace_text { color: #d4d4d4 !important; }
+  </style>
+  
+  <script src="ace/ace.js"></script>
+  <script src="ace/ext-language_tools.js"></script>
+</head>
+<body>
+  <pre id="editor"></pre>
+  
+  <script>
+    ace.require("ace/ext/language_tools");
+    var editor = ace.edit("editor");
+    
+    editor.setTheme("ace/theme/monokai");
+    editor.session.setMode("ace/mode/lua");
+    
+    editor.setOptions({
+      fontSize: "14px",
+      showPrintMargin: false,
+      enableLiveAutocompletion: true,
+      enableBasicAutocompletion: true,
+      enableSnippets: true,
+      showGutter: true,
+      highlightActiveLine: true,
+      highlightSelectedWord: true,
+      cursorStyle: "smooth",
+      wrap: false,
+      tabSize: 2,
+      useSoftTabs: true
+    });
+    
+    editor.setValue("", -1);
+    
+    // REQUIRED FUNCTIONS - DO NOT REMOVE
+    GetText = () => editor.getValue();
+    SetText = (x) => editor.setValue(x, -1);
+    ClearText = () => editor.setValue("");
+    SetTheme = (th) => editor.setTheme("ace/theme/" + th);
+    SetOpacity = (o) => document.getElementById('editor').style.opacity = o;
+  </script>
+</body>
+</html>
