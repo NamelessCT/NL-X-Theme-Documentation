@@ -901,7 +901,7 @@ editor.UpdateSettings(settings);
 
 ## Complete Example
 
-See `theme-wpf.json` for a complete working example with all properties configured.
+See `theme-wpf.json` and `Ace.html` for a complete working example with all properties configured.
 
 ---
 
@@ -912,4 +912,5 @@ See `theme-wpf.json` for a complete working example with all properties configur
 3. **Gradient buttons** use `BackColor` as top and `GradientColor` as bottom
 4. **Test incrementally** - change one section at a time
 5. **Backup your theme** before making major changes
+
 6. **Ace.html is just HTML** - use any CSS/JS technique you know
