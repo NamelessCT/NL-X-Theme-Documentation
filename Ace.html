@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style type="text/css">
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background: transparent;
+      }
+
+      #editor {
+        margin: 0;
+        opacity: 0.85;
+        background-color: transparent;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border: none;
+        box-shadow: none;
+      }
+
+      ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: rgba(40, 0, 40, 0.5);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: rgba(200, 150, 255, 0.4);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(200, 150, 255, 0.6);
+      }
+
+      .ace_cursor {
+        border-left: 2px solid #C896FF !important;
+      }
+
+      .ace_selection {
+        background: rgba(200, 150, 255, 0.3) !important;
+      }
+
+      .ace_marker-layer .ace_active-line {
+        background: rgba(200, 150, 255, 0.1) !important;
+      }
+
+      .ace_gutter {
+        background: transparent !important;
+        color: #C896FF !important;
+      }
+
+      .ace_gutter-active-line {
+        background: rgba(200, 150, 255, 0.2) !important;
+      }
+
+      .ace_scroller {
+        background: transparent !important;
+      }
+
+      .ace_content {
+        background: transparent !important;
+      }
+    </style>
+    <script src="ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="ace/ext-language_tools.js"></script>
+  </head>
+  <body>
+    <pre id="editor"></pre>
+    <script>
+      var GetText;
+      var SetText;
+      var ClearText;
+      var SetTheme;
+
+      ace.require("ace/ext/language_tools");
+      var editor = ace.edit("editor");
+      editor.setTheme("ace/theme/tomorrow_night");
+      editor.session.setMode("ace/mode/lua");
+      editor.setOption("enableLiveAutocompletion", true);
+      editor.setOption("cursorStyle", "smooth");
+      editor.setShowPrintMargin(false);
+      editor.setOption("fontSize", "13px");
+      editor.container.style.lineHeight = "1.5";
+      editor.renderer.setScrollMargin(10, 10, 10, 10);
+      editor.setValue("print(\"hello\")\n", -1);
+
+      GetText = function() {
+        return editor.getValue();
+      }
+
+      SetText = function(x) {
+        editor.setValue(x);
+        editor.session.setValue(x);
+      }
+
+      ClearText = function() {
+        editor.setValue("");
+      }
+
+      SetTheme = function(th) {
+        editor.setTheme("ace/theme/" + th);
+      }
+
+      SetOpacity = function(opacity) {
+        document.getElementById('editor').style.opacity = opacity;
+      }
+
+      editor.on("input", async function() {
+        await CefSharp.BindObjectAsync("synServiceAsync");
+        synServiceAsync.textChanged(editor.getValue());
+      });
+
+      document.addEventListener('keydown', async e => {
+        if (e.ctrlKey) {
+          if (e.key === 's') {
+            e.preventDefault();
+            await CefSharp.BindObjectAsync("synServiceAsync");
+            synServiceAsync.saveRequest(editor.getValue());
+          }
+          else if (e.key === 'o') {
+            e.preventDefault();
+            await CefSharp.BindObjectAsync("synServiceAsync");
+            synServiceAsync.openRequest();
+          }
+        }
+      });
+
+      document.oncontextmenu = function() {
+        return false;
+      }
+    </script>
+  </body>
+</html>
