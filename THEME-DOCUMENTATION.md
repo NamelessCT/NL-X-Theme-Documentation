@@ -473,7 +473,9 @@ Some theme properties are shared across multiple pages:
 | `ScriptBox.Font` | Key text box, password boxes, "Remember Me" checkbox |
 | `WelcomeLabel` | "Welcome to NL-X" on Access page |
 
-> ⚠️ **IMPORTANT NOTE:** Due to the nature of NL-X Key and Premium systems, the **Premium Login** and **NL-X Key (Access)** windows will **not be visible** at the moment. These windows may be added later for theme inspection/preview purposes. There is no point since it is premium only and you must be logged + remembered on premium in to use themes.
+> ⚠️ **IMPORTANT NOTE:** Due to the nature of NL-X Key and Premium systems, the **Premium Login** and **NL-X Key (Access)** windows will **only be visible if the user does not tick remember me and has logged in as a premium user before.** This is not to limit what you can make your UIs look like, but it is to keep security strict. If you hit remember me on your premium login before and want to view these pages with your theme, run NL-X with this command-line argument in Command Prompt:
+```NL-X.exe -reset```
+After doing that, you must log into your premium account without hitting "Remember Me", then restart NL-X.
 
 ---
 
@@ -914,4 +916,5 @@ See `theme-wpf.json` and `Ace.html` for a complete working example with all prop
 5. **Backup your theme** before making major changes
 
 6. **Ace.html is just HTML** - use any CSS/JS technique you know
+
 
