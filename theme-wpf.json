@@ -1,56 +1,112 @@
 {
-  "Version": 1,
+  "Version": 2,
   "Load": {
     "Base": {
       "Image": {
         "Path": "https://i.pinimg.com/originals/e5/4a/fa/e54afabd75adb33464e85f2687b43f87.gif",
         "Online": true
       },
-      "BackColor": { "A": 255, "R": 25, "G": 10, "B": 45 },
+      "BackColor": {
+        "A": 255,
+        "R": 25,
+        "G": 10,
+        "B": 45
+      },
       "TopMost": true,
       "Opacity": 0.95
     },
-    "BaseStrings": {
-      "CheckingUpdates": "Checking for updates...",
-      "DownloadingData": "Downloading data...",
-      "CheckingData": "Checking data...",
-      "DownloadingDlls": "Downloading DLLs...",
-      "ValidatingKey": "Validating key...",
-      "Ready": "Ready!"
+    "Logo": {
+      "Image": {
+        "Path": "",
+        "Online": false
+      }
     },
-    "Logo": { "Image": { "Path": "", "Online": false } },
     "TopBox": {
       "Enabled": true,
-      "BackColor": { "A": 220, "R": 50, "G": 20, "B": 80 },
+      "BackColor": {
+        "A": 220,
+        "R": 50,
+        "G": 20,
+        "B": 80
+      },
       "Opacity": 1.0
     },
     "TitleBox": {
       "Enabled": true,
-      "Font": { "Name": "Segoe UI Bold", "Size": 13.0 },
-      "Text": "NL-X :: Loading",
-      "BackColor": { "A": 0, "R": 0, "G": 0, "B": 0 },
-      "TextColor": { "A": 255, "R": 120, "G": 255, "B": 180 },
+      "Font": {
+        "Name": "Segoe UI Bold",
+        "Size": 13.0
+      },
+      "Text": "NL-X : : Loading",
+      "BackColor": {
+        "A": 0,
+        "R": 0,
+        "G": 0,
+        "B": 0
+      },
+      "TextColor": {
+        "A": 255,
+        "R": 120,
+        "G": 255,
+        "B": 180
+      },
       "Opacity": 1.0
     },
     "StatusBox": {
       "Enabled": true,
-      "Font": { "Name": "Verdana", "Size": 12.0 },
+      "Font": {
+        "Name": "Arial Black",
+        "Size": 12.0
+      },
       "Text": "Starting up...",
-      "BackColor": { "A": 0, "R": 0, "G": 0, "B": 0 },
-      "TextColor": { "A": 255, "R": 255, "G": 255, "B": 255 },
+      "BackColor": {
+        "A": 0,
+        "R": 0,
+        "G": 0,
+        "B": 0
+      },
+      "TextColor": {
+        "A": 255,
+        "R": 0,
+        "G": 0,
+        "B": 255
+      },
       "Opacity": 1.0
     },
     "WelcomeLabel": {
       "Enabled": true,
-      "Font": { "Name": "Segoe UI Semibold", "Size": 12.0 },
+      "Font": {
+        "Name": "Verdana",
+        "Size": 12.0
+      },
       "Text": "Welcome to NL-X",
-      "BackColor": { "A": 0, "R": 0, "G": 0, "B": 0 },
-      "TextColor": { "A": 255, "R": 120, "G": 255, "B": 180 },
+      "BackColor": {
+        "A": 0,
+        "R": 0,
+        "G": 0,
+        "B": 0
+      },
+      "TextColor": {
+        "A": 255,
+        "R": 120,
+        "G": 255,
+        "B": 180
+      },
       "Opacity": 1.0
     },
     "ProgressBar": {
-      "BackColor": { "A": 255, "R": 30, "G": 30, "B": 50 },
-      "ForeColor": { "A": 255, "R": 100, "G": 220, "B": 255 }
+      "BackColor": {
+        "A": 255,
+        "R": 30,
+        "G": 30,
+        "B": 50
+      },
+      "ForeColor": {
+        "A": 255,
+        "R": 100,
+        "G": 220,
+        "B": 255
+      }
     }
   },
   "Main": {
@@ -59,140 +115,398 @@
         "Path": "https://i.pinimg.com/originals/e5/4a/fa/e54afabd75adb33464e85f2687b43f87.gif",
         "Online": true
       },
-      "BackColor": { "A": 255, "R": 10, "G": 15, "B": 35 },
+      "BackColor": {
+        "A": 255,
+        "R": 10,
+        "G": 15,
+        "B": 35
+      },
       "TopMost": false,
       "Opacity": 1.0
     },
     "Editor": {
       "Light": false,
-      "FixPixel": { "A": 255, "R": 0, "G": 0, "B": 0 },
+      "FixPixel": {
+        "A": 255,
+        "R": 0,
+        "G": 0,
+        "B": 0
+      },
       "Opacity": 0.9
-    },
-    "BaseStrings": {
-      "Checking": "Scanning...",
-      "Injecting": "Deploying...",
-      "Scanning": "Analyzing...",
-      "Ready": "Online",
-      "FailedToFindRoblox": "Target not found",
-      "NotInjected": "Standby",
-      "AlreadyInjected": "Active"
     },
     "RightClickStrings": {
       "Execute": "Run Script",
       "LoadToEditor": "Open in Editor",
       "Refresh": "Reload List"
     },
-    "Logo": { "Image": { "Path": "", "Online": false } },
+    "Logo": {
+      "Image": {
+        "Path": "",
+        "Online": false
+      }
+    },
     "TopBox": {
       "Enabled": true,
-      "BackColor": { "A": 200, "R": 20, "G": 40, "B": 80 },
+      "BackColor": {
+        "A": 200,
+        "R": 20,
+        "G": 40,
+        "B": 80
+      },
       "Opacity": 1.0
     },
     "TitleBox": {
       "Enabled": true,
-      "Font": { "Name": "Segoe UI Bold", "Size": 13.0 },
-      "FormatString": "NL-X :: Cyber Edition",
-      "BackColor": { "A": 0, "R": 0, "G": 0, "B": 0 },
-      "TextColor": { "A": 255, "R": 0, "G": 255, "B": 200 },
+      "Font": {
+        "Name": "Segoe UI Bold",
+        "Size": 13.0
+      },
+      "FormatString": "NL-X : : Cyber Edition",
+      "BackColor": {
+        "A": 0,
+        "R": 0,
+        "G": 0,
+        "B": 0
+      },
+      "TextColor": {
+        "A": 255,
+        "R": 0,
+        "G": 255,
+        "B": 200
+      },
       "Opacity": 1.0
     },
     "ScriptBox": {
-      "Font": { "Name": "Cascadia Mono", "Size": 11.0 },
-      "BackColor": { "A": 160, "R": 15, "G": 25, "B": 50 },
-      "TextColor": { "A": 255, "R": 150, "G": 255, "B": 200 },
+      "Font": {
+        "Name": "Cascadia Mono",
+        "Size": 11.0
+      },
+      "BackColor": {
+        "A": 160,
+        "R": 15,
+        "G": 25,
+        "B": 50
+      },
+      "TextColor": {
+        "A": 255,
+        "R": 150,
+        "G": 255,
+        "B": 200
+      },
       "Opacity": 0.85
     },
     "MinimizeButton": {
-      "BackColor": { "A": 0, "R": 0, "G": 0, "B": 0 },
-      "GlyphColor": { "A": 255, "R": 100, "G": 255, "B": 180 },
+      "BackColor": {
+        "A": 0,
+        "R": 0,
+        "G": 0,
+        "B": 0
+      },
+      "GlyphColor": {
+        "A": 255,
+        "R": 100,
+        "G": 255,
+        "B": 180
+      },
       "Opacity": 1.0
     },
     "ExitButton": {
-      "BackColor": { "A": 0, "R": 0, "G": 0, "B": 0 },
-      "GlyphColor": { "A": 255, "R": 255, "G": 100, "B": 100 },
+      "BackColor": {
+        "A": 0,
+        "R": 0,
+        "G": 0,
+        "B": 0
+      },
+      "GlyphColor": {
+        "A": 255,
+        "R": 255,
+        "G": 100,
+        "B": 100
+      },
       "Opacity": 1.0
     },
     "ExecuteButton": {
-      "Image": { "Path": "", "Online": false },
-      "Font": { "Name": "Arial Black", "Size": 12.0 },
-      "BackColor": { "A": 255, "R": 0, "G": 120, "B": 100 },
-      "GradientColor": { "A": 255, "R": 0, "G": 60, "B": 50 },
-      "TextColor": { "A": 255, "R": 200, "G": 255, "B": 230 },
+      "Image": {
+        "Path": "",
+        "Online": false
+      },
+      "Font": {
+        "Name": "Arial Black",
+        "Size": 12.0
+      },
+      "BackColor": {
+        "A": 255,
+        "R": 0,
+        "G": 120,
+        "B": 100
+      },
+      "GradientColor": {
+        "A": 255,
+        "R": 0,
+        "G": 60,
+        "B": 50
+      },
+      "TextColor": {
+        "A": 255,
+        "R": 200,
+        "G": 255,
+        "B": 230
+      },
       "Text": "► Run",
       "Opacity": 1.0
     },
     "ClearButton": {
-      "Image": { "Path": "", "Online": false },
-      "Font": { "Name": "Tahoma", "Size": 12.0 },
-      "BackColor": { "A": 255, "R": 80, "G": 40, "B": 100 },
-      "GradientColor": { "A": 255, "R": 40, "G": 20, "B": 50 },
-      "TextColor": { "A": 255, "R": 220, "G": 180, "B": 255 },
-      "Text": "Clear",
+      "Image": {
+        "Path": "",
+        "Online": false
+      },
+      "Font": {
+        "Name": "Arial Black",
+        "Size": 13.0
+      },
+      "BackColor": {
+        "A": 255,
+        "R": 80,
+        "G": 40,
+        "B": 100
+      },
+      "GradientColor": {
+        "A": 255,
+        "R": 40,
+        "G": 20,
+        "B": 50
+      },
+      "TextColor": {
+        "A": 255,
+        "R": 220,
+        "G": 180,
+        "B": 255
+      },
+      "Text": "❌ Clear",
       "Opacity": 1.0
     },
     "OpenFileButton": {
-      "Image": { "Path": "", "Online": false },
-      "Font": { "Name": "Segoe UI Bold", "Size": 13.0 },
-      "BackColor": { "A": 255, "R": 50, "G": 80, "B": 120 },
-      "GradientColor": { "A": 255, "R": 25, "G": 40, "B": 60 },
-      "TextColor": { "A": 255, "R": 180, "G": 220, "B": 255 },
-      "Text": "Open",
+      "Image": {
+        "Path": "",
+        "Online": false
+      },
+      "Font": {
+        "Name": "Arial Black",
+        "Size": 13.0
+      },
+      "BackColor": {
+        "A": 255,
+        "R": 50,
+        "G": 80,
+        "B": 120
+      },
+      "GradientColor": {
+        "A": 255,
+        "R": 25,
+        "G": 40,
+        "B": 60
+      },
+      "TextColor": {
+        "A": 255,
+        "R": 180,
+        "G": 220,
+        "B": 255
+      },
+      "Text": "📁 Open",
       "Opacity": 1.0
     },
     "ExecuteFileButton": {
-      "Image": { "Path": "", "Online": false },
-      "Font": { "Name": "Segoe UI Bold", "Size": 13.0 },
-      "BackColor": { "A": 255, "R": 100, "G": 60, "B": 20 },
-      "GradientColor": { "A": 255, "R": 50, "G": 30, "B": 10 },
-      "TextColor": { "A": 255, "R": 255, "G": 220, "B": 150 },
-      "Text": "Run File",
+      "Image": {
+        "Path": "",
+        "Online": false
+      },
+      "Font": {
+        "Name": "Arial Black",
+        "Size": 13.0
+      },
+      "BackColor": {
+        "A": 255,
+        "R": 100,
+        "G": 60,
+        "B": 20
+      },
+      "GradientColor": {
+        "A": 255,
+        "R": 50,
+        "G": 30,
+        "B": 10
+      },
+      "TextColor": {
+        "A": 255,
+        "R": 255,
+        "G": 220,
+        "B": 150
+      },
+      "Text": "📂 Run File",
       "Opacity": 1.0
     },
     "SaveFileButton": {
-      "Image": { "Path": "", "Online": false },
-      "Font": { "Name": "Segoe UI Bold", "Size": 13.0 },
-      "BackColor": { "A": 255, "R": 60, "G": 100, "B": 60 },
-      "GradientColor": { "A": 255, "R": 30, "G": 50, "B": 30 },
-      "TextColor": { "A": 255, "R": 180, "G": 255, "B": 180 },
-      "Text": "Save",
+      "Image": {
+        "Path": "",
+        "Online": false
+      },
+      "Font": {
+        "Name": "Arial Black",
+        "Size": 13.0
+      },
+      "BackColor": {
+        "A": 255,
+        "R": 60,
+        "G": 100,
+        "B": 60
+      },
+      "GradientColor": {
+        "A": 255,
+        "R": 30,
+        "G": 50,
+        "B": 30
+      },
+      "TextColor": {
+        "A": 255,
+        "R": 180,
+        "G": 255,
+        "B": 180
+      },
+      "Text": "💾 Save",
       "Opacity": 1.0
     },
     "OptionsButton": {
-      "Image": { "Path": "", "Online": false },
-      "Font": { "Name": "Segoe UI Bold", "Size": 13.0 },
-      "BackColor": { "A": 255, "R": 70, "G": 70, "B": 90 },
-      "GradientColor": { "A": 255, "R": 35, "G": 35, "B": 45 },
-      "TextColor": { "A": 255, "R": 200, "G": 200, "B": 230 },
+      "Image": {
+        "Path": "",
+        "Online": false
+      },
+      "Font": {
+        "Name": "Arial Black",
+        "Size": 13.0
+      },
+      "BackColor": {
+        "A": 255,
+        "R": 70,
+        "G": 70,
+        "B": 90
+      },
+      "GradientColor": {
+        "A": 255,
+        "R": 35,
+        "G": 35,
+        "B": 45
+      },
+      "TextColor": {
+        "A": 255,
+        "R": 200,
+        "G": 200,
+        "B": 230
+      },
       "Text": "⚙ Settings",
       "Opacity": 1.0
     },
     "AttachButton": {
-      "Image": { "Path": "", "Online": false },
-      "Font": { "Name": "Segoe UI Bold", "Size": 13.0 },
-      "BackColor": { "A": 255, "R": 150, "G": 50, "B": 50 },
-      "GradientColor": { "A": 255, "R": 75, "G": 25, "B": 25 },
-      "TextColor": { "A": 255, "R": 255, "G": 200, "B": 200 },
+      "Image": {
+        "Path": "",
+        "Online": false
+      },
+      "Font": {
+        "Name": "Arial Black",
+        "Size": 13.0
+      },
+      "BackColor": {
+        "A": 255,
+        "R": 150,
+        "G": 50,
+        "B": 50
+      },
+      "GradientColor": {
+        "A": 255,
+        "R": 75,
+        "G": 25,
+        "B": 25
+      },
+      "TextColor": {
+        "A": 255,
+        "R": 255,
+        "G": 200,
+        "B": 200
+      },
       "Text": "💉Attach",
       "Opacity": 1.0
     },
     "ScriptHubButton": {
-      "Image": { "Path": "", "Online": false },
-      "Font": { "Name": "Segoe UI Bold", "Size": 13.0 },
-      "BackColor": { "A": 255, "R": 100, "G": 50, "B": 120 },
-      "GradientColor": { "A": 255, "R": 50, "G": 25, "B": 60 },
-      "TextColor": { "A": 255, "R": 230, "G": 180, "B": 255 },
-      "TextNormal": "Script Hub",
+      "Image": {
+        "Path": "",
+        "Online": false
+      },
+      "Font": {
+        "Name": "Arial Black",
+        "Size": 13.0
+      },
+      "BackColor": {
+        "A": 255,
+        "R": 100,
+        "G": 50,
+        "B": 120
+      },
+      "GradientColor": {
+        "A": 255,
+        "R": 50,
+        "G": 25,
+        "B": 60
+      },
+      "TextColor": {
+        "A": 255,
+        "R": 230,
+        "G": 180,
+        "B": 255
+      },
+      "TextNormal": "📜 Hub",
       "TextYield": "Starting...",
       "Opacity": 1.0
     },
     "TabControl": {
-      "BackColor": { "A": 150, "R": 20, "G": 30, "B": 60 },
-      "TabBackColor": { "A": 255, "R": 40, "G": 50, "B": 80 },
-      "TabActiveColor": { "A": 255, "R": 60, "G": 80, "B": 120 },
-      "TabTextColor": { "A": 255, "R": 150, "G": 220, "B": 255 },
-      "TabFont": { "Name": "Consolas", "Size": 11.0 },
-      "AddButtonColor": { "A": 255, "R": 50, "G": 70, "B": 100 },
-      "CloseButtonColor": { "A": 255, "R": 255, "G": 150, "B": 150 },
+      "BackColor": {
+        "A": 150,
+        "R": 20,
+        "G": 30,
+        "B": 60
+      },
+      "TabBackColor": {
+        "A": 255,
+        "R": 40,
+        "G": 50,
+        "B": 80
+      },
+      "TabActiveColor": {
+        "A": 255,
+        "R": 60,
+        "G": 80,
+        "B": 120
+      },
+      "TabTextColor": {
+        "A": 255,
+        "R": 150,
+        "G": 220,
+        "B": 255
+      },
+      "TabFont": {
+        "Name": "Consolas",
+        "Size": 11.0
+      },
+      "AddButtonColor": {
+        "A": 255,
+        "R": 50,
+        "G": 70,
+        "B": 100
+      },
+      "CloseButtonColor": {
+        "A": 255,
+        "R": 255,
+        "G": 150,
+        "B": 150
+      },
       "Opacity": 0.9
     }
   },
@@ -202,57 +516,163 @@
         "Path": "https://i.pinimg.com/originals/e5/4a/fa/e54afabd75adb33464e85f2687b43f87.gif",
         "Online": true
       },
-      "BackColor": { "A": 255, "R": 15, "G": 10, "B": 30 },
+      "BackColor": {
+        "A": 255,
+        "R": 15,
+        "G": 10,
+        "B": 30
+      },
       "TopMost": true,
       "Opacity": 0.98
     },
-    "Logo": { "Image": { "Path": "", "Online": false } },
+    "Logo": {
+      "Image": {
+        "Path": "",
+        "Online": false
+      }
+    },
     "TopBox": {
       "Enabled": true,
-      "BackColor": { "A": 200, "R": 40, "G": 20, "B": 60 },
+      "BackColor": {
+        "A": 200,
+        "R": 40,
+        "G": 20,
+        "B": 60
+      },
       "Opacity": 1.0
     },
     "TitleBox": {
       "Enabled": true,
-      "Font": { "Name": "Segoe UI Bold", "Size": 13.0 },
+      "Font": {
+        "Name": "Segoe UI Bold",
+        "Size": 13.0
+      },
       "Text": "Script Library",
-      "BackColor": { "A": 0, "R": 0, "G": 0, "B": 0 },
-      "TextColor": { "A": 255, "R": 255, "G": 180, "B": 100 },
+      "BackColor": {
+        "A": 0,
+        "R": 0,
+        "G": 0,
+        "B": 0
+      },
+      "TextColor": {
+        "A": 255,
+        "R": 255,
+        "G": 180,
+        "B": 100
+      },
       "Opacity": 1.0
     },
     "ScriptBox": {
-      "Font": { "Name": "Consolas", "Size": 11.0 },
-      "BackColor": { "A": 180, "R": 25, "G": 15, "B": 40 },
-      "TextColor": { "A": 255, "R": 255, "G": 200, "B": 150 },
+      "Font": {
+        "Name": "Consolas",
+        "Size": 11.0
+      },
+      "BackColor": {
+        "A": 180,
+        "R": 25,
+        "G": 15,
+        "B": 40
+      },
+      "TextColor": {
+        "A": 255,
+        "R": 255,
+        "G": 200,
+        "B": 150
+      },
       "Opacity": 0.85
     },
     "DescriptionBox": {
-      "Font": { "Name": "Segoe UI", "Size": 11.0 },
-      "BackColor": { "A": 180, "R": 20, "G": 20, "B": 45 },
-      "TextColor": { "A": 255, "R": 200, "G": 200, "B": 255 },
+      "Font": {
+        "Name": "Segoe UI",
+        "Size": 11.0
+      },
+      "BackColor": {
+        "A": 180,
+        "R": 20,
+        "G": 20,
+        "B": 45
+      },
+      "TextColor": {
+        "A": 255,
+        "R": 200,
+        "G": 200,
+        "B": 255
+      },
       "Opacity": 0.85
     },
     "MinimizeButton": {
-      "BackColor": { "A": 0, "R": 0, "G": 0, "B": 0 },
-      "GlyphColor": { "A": 255, "R": 255, "G": 200, "B": 100 },
+      "BackColor": {
+        "A": 0,
+        "R": 0,
+        "G": 0,
+        "B": 0
+      },
+      "GlyphColor": {
+        "A": 255,
+        "R": 255,
+        "G": 200,
+        "B": 100
+      },
       "Opacity": 1.0
     },
     "ExecuteButton": {
-      "Image": { "Path": "", "Online": false },
-      "Font": { "Name": "Segoe UI Bold", "Size": 12.0 },
-      "BackColor": { "A": 255, "R": 120, "G": 80, "B": 20 },
-      "GradientColor": { "A": 255, "R": 60, "G": 40, "B": 10 },
-      "TextColor": { "A": 255, "R": 255, "G": 230, "B": 180 },
+      "Image": {
+        "Path": "",
+        "Online": false
+      },
+      "Font": {
+        "Name": "Segoe UI Bold",
+        "Size": 12.0
+      },
+      "BackColor": {
+        "A": 255,
+        "R": 120,
+        "G": 80,
+        "B": 20
+      },
+      "GradientColor": {
+        "A": 255,
+        "R": 60,
+        "G": 40,
+        "B": 10
+      },
+      "TextColor": {
+        "A": 255,
+        "R": 255,
+        "G": 230,
+        "B": 180
+      },
       "TextNormal": "► Execute",
       "TextYield": "Running...",
       "Opacity": 1.0
     },
     "CloseButton": {
-      "Image": { "Path": "", "Online": false },
-      "Font": { "Name": "Segoe UI Bold", "Size": 12.0 },
-      "BackColor": { "A": 255, "R": 100, "G": 40, "B": 60 },
-      "GradientColor": { "A": 255, "R": 50, "G": 20, "B": 30 },
-      "TextColor": { "A": 255, "R": 255, "G": 180, "B": 200 },
+      "Image": {
+        "Path": "",
+        "Online": false
+      },
+      "Font": {
+        "Name": "Segoe UI Bold",
+        "Size": 13.0
+      },
+      "BackColor": {
+        "A": 255,
+        "R": 100,
+        "G": 40,
+        "B": 60
+      },
+      "GradientColor": {
+        "A": 255,
+        "R": 50,
+        "G": 20,
+        "B": 30
+      },
+      "TextColor": {
+        "A": 255,
+        "R": 255,
+        "G": 180,
+        "B": 200
+      },
       "Text": "Close",
       "Opacity": 1.0
     }
