@@ -1,24 +1,28 @@
 # NL-X Theme Documentation
 
-This documentation covers the complete theming system for NL-X, including the `theme-wpf.json` configuration file and the Ace editor customization.
+This documentation covers the **complete** theming system for NL-X. It explains every single property, what it does, where it appears on screen, and how to customize it. You do NOT need access to the NL-X source code to create themes - this guide tells you everything.
 
 ---
 
 ## Table of Contents
 
 1. [Overview](#overview)
-2. [WPF Compatibility](#wpf-compatibility)
+2. [Understanding the NL-X Windows](#understanding-the-nl-x-windows)
 3. [Theme File Location](#theme-file-location)
 4. [Theme Structure](#theme-structure)
-5. [Color Format](#color-format)
-6. [Font Format](#font-format)
-7. [Complete WPF Font List](#complete-wpf-font-list)
-8. [Image Format](#image-format)
-9. [Load Section](#load-section)
-10. [Main Section](#main-section)
-11. [ScriptHub Section](#scripthub-section)
-12. [Opacity Support](#opacity-support)
-13. [Ace Editor (Complete Guide)](#ace-editor-complete-guide)
+5. [Property Types Explained](#property-types-explained)
+6. [Color Format (TColor)](#color-format)
+7. [Font Format (TFont)](#font-format)
+8. [Complete WPF Font List](#complete-wpf-font-list)
+9. [Image Format (TImage)](#image-format)
+10. [Opacity Explained](#opacity-explained)
+11. [Button Types Explained](#button-types-explained)
+12. [Load Section - Complete Reference](#load-section)
+13. [Main Section - Complete Reference](#main-section)
+14. [ScriptHub Section - Complete Reference](#scripthub-section)
+15. [All Customizable Strings](#all-customizable-strings)
+16. [Ace Editor - Complete Guide](#ace-editor-complete-guide)
+17. [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -26,43 +30,82 @@ This documentation covers the complete theming system for NL-X, including the `t
 
 NL-X uses a JSON-based theming system that allows complete customization of the application's appearance. The theme file controls colors, fonts, images, opacity, and text for all UI elements across three main windows:
 
-- **Loader** - The initial loading window
-- **Main** - The primary application window
-- **ScriptHub** - The script browser window
+- **Loader** - The initial loading window (shows during startup)
+- **KeyPage** - Where users enter their key (uses Load theme settings)
+- **PremiumLogin** - Where premium users log in (uses Load theme settings)
+- **Main** - The primary application window with the script editor
+- **ScriptHub** - The script browser popup window
 
 ---
 
-## WPF Compatibility
+## Understanding the NL-X Windows
 
-NL-X is built with **WPF (Windows Presentation Foundation)** using **XAML** for its UI. The `theme-wpf.json` file is designed to work seamlessly with WPF's rendering system.
+This section describes each window and where every UI element is located.
 
-### How It Works
+### Loader Window (Loading Screen)
 
-1. **JSON → C# Classes**: The theme JSON is deserialized into C# classes (`TButton`, `TLabel`, `TColor`, etc.)
-2. **C# → WPF Properties**: These classes are converted to WPF-compatible types:
-   - `TColor` → `SolidColorBrush` or `LinearGradientBrush`
-   - `TFont` → `FontFamily` + `FontSize`
-   - `TImage` → `ImageBrush` or `BitmapImage`
-3. **WPF → XAML Controls**: Properties are applied to XAML controls (`Button`, `Label`, `TabControl`, etc.)
+This is the first window that appears when you start NL-X.
 
-### Why WPF?
+**Layout (top to bottom):**
+- **TopBox** - A colored horizontal bar at the very top of the window
+- **TitleBox** - Sits inside/below the TopBox, displays "NL-X - Loader" text
+- **Logo** - Optional image in the center area (if you set an image path)
+- **StatusBox** - Text in the center showing loading status like "Starting up..."
+- **ProgressBar** - A horizontal loading bar near the bottom
 
-- **Hardware Acceleration**: GPU-accelerated rendering for smooth animations
-- **Vector Graphics**: Resolution-independent UI scaling
-- **Rich Styling**: Complete control over every visual element
-- **Data Binding**: Dynamic theme updates without restart
-- **Transparency**: Native support for layered windows and alpha blending
+**What happens during loading:**
+1. Window opens showing your `StatusBox.Text` (default: "Initializing...")
+2. Checks for updates and downloads files
+3. Validates credentials if saved
+4. Navigates to KeyPage (if no saved credentials) or MainWindow
 
-### XAML Control Mapping
+### KeyPage Window (Key Entry)
 
-| Theme Property | WPF/XAML Control |
-|----------------|------------------|
-| `TitleBox` | `Label` |
-| `ExecuteButton` | `Button` |
-| `ScriptBox` | `ListBox` |
-| `TabControl` | `TabControl` + `TabItem` |
-| `TopBox` | `Grid` or `Border` |
-| `ProgressBar` | `ProgressBar` |
+This window appears when a user needs to enter their key or log in.
+
+**Layout (top to bottom):**
+- **TopBox** - Colored bar at top
+- **TitleBox** - Window title, shows "NL-X" or status messages
+- **Close Button** - Top-right corner (X button)
+- **WelcomeLabel** - Welcome text like "Welcome to NL-X"
+- **Key Input Box** - Text field where user types their key (styled by `Main.ScriptBox`)
+- **Remember Me Checkbox** - Option to save the key
+- **Buttons** - "Get Key", "Submit", "Premium Login" (styled by `Main.ExecuteButton`)
+
+**Theme properties used:**
+- `Load.TitleBox` - Title styling (font, colors)
+- `Load.WelcomeLabel` - Welcome message text and styling
+- `Main.ScriptBox` - Key input box styling (background, text color, font)
+- `Main.ExecuteButton` - Button styling (colors, gradient, font)
+
+### Main Window (Script Executor)
+
+This is the primary window where you write and execute scripts.
+
+**Layout:**
+- **TopBox** - Colored bar at very top
+- **TitleBox** - Window title showing "NL-X - {version}", updates with status during attach
+- **Minimize Button** - Top-right, the (─) icon
+- **Exit Button** - Top-right corner, the (×) icon
+- **Logo** - Optional image (if path set)
+- **TabControl** - Script tabs area (Script 1, Script 2, etc.) with [+] to add new tabs
+- **Ace Editor** - The large code editing area (customized via Ace.html file, NOT theme JSON)
+- **ScriptBox** - File list on the right side showing .lua files from your scripts folder
+- **Buttons at bottom** - Execute, Clear, Open File, Execute File, Save File, Options, Attach, Script Hub
+
+### ScriptHub Window (Script Browser)
+
+A popup window for browsing and running pre-made scripts.
+
+**Layout:**
+- **TopBox** - Colored bar at top
+- **TitleBox** - Shows "NL-X - Script Hub"
+- **Minimize Button** - (─) icon
+- **Close Button** - (×) icon (styled differently than main close)
+- **ScriptBox** - List of available scripts on the left
+- **DescriptionBox** - Description of selected script on the right
+- **ExecuteButton** - Runs the selected script (Yield button - shows "Executing..." while running)
+- **CloseButton** - Closes the Script Hub window
 
 ---
 
@@ -74,6 +117,19 @@ bin/theme-wpf.json
 ```
 
 If no theme file exists, the application uses default styles.
+
+### Included Template Files
+
+This documentation comes with ready-to-use template files:
+
+| File | Description |
+|------|-------------|
+| `theme-wpf-blank.json` | Blank template with default values - start from scratch |
+| `Ace-blank.html` | Blank Ace editor template with required functions |
+| `theme-wpf.json` | Complete Cyberpunk theme example (already in bin folder) |
+| `Ace.html` | Complete Cyberpunk Ace editor (already in bin folder) |
+
+**To create a new theme:** Copy `theme-wpf-blank.json` to `bin/theme-wpf.json` and `Ace-blank.html` to `bin/Ace.html`, then customize.
 
 ---
 
@@ -277,14 +333,6 @@ The loader window configuration:
     "TopMost": true,
     "Opacity": 1.0
   },
-  "BaseStrings": {
-    "CheckingUpdates": "Checking for updates...",
-    "DownloadingData": "Downloading data...",
-    "CheckingData": "Checking data...",
-    "DownloadingDlls": "Downloading DLLs...",
-    "ValidatingKey": "Validating key...",
-    "Ready": "Ready!"
-  },
   "Logo": { "Image": { "Path": "", "Online": false } },
   "TopBox": {
     "Enabled": true,
@@ -330,7 +378,6 @@ The loader window configuration:
 | `Base.BackColor` | Fallback background color |
 | `Base.TopMost` | Keep window on top |
 | `Base.Opacity` | Window opacity (0.0 - 1.0) |
-| `BaseStrings` | Status messages during loading |
 | `TopBox` | Top bar styling |
 | `TitleBox` | Title label styling |
 | `StatusBox` | Status text styling (e.g., "Initializing...") |
@@ -355,15 +402,6 @@ The main application window configuration:
     "Light": false,
     "FixPixel": { "A": 255, "R": 0, "G": 0, "B": 0 },
     "Opacity": 1.0
-  },
-  "BaseStrings": {
-    "Checking": "Checking...",
-    "Injecting": "Injecting...",
-    "Scanning": "Scanning...",
-    "Ready": "Ready",
-    "FailedToFindRoblox": "Failed to find Roblox",
-    "NotInjected": "Not Injected",
-    "AlreadyInjected": "Already Injected"
   },
   "RightClickStrings": {
     "Execute": "Execute",
@@ -498,41 +536,240 @@ The script hub window configuration:
 
 ---
 
-## Opacity Support
+## Opacity Explained
 
-All UI elements support an `Opacity` property (0.0 to 1.0):
+**What is Opacity?**
+Opacity controls how see-through (transparent) an element is. It's a number between 0.0 and 1.0.
 
 ```json
 "Opacity": 0.85
 ```
 
-- `1.0` = Fully opaque (default)
-- `0.5` = 50% transparent
-- `0.0` = Fully transparent
+| Value | Effect | Use Case |
+|-------|--------|----------|
+| `1.0` | Fully solid, nothing shows through | Default, normal look |
+| `0.9` | Slightly transparent | Subtle see-through effect |
+| `0.7` | Noticeably transparent | Overlay effect, can see background |
+| `0.5` | Half transparent | Strong overlay, background clearly visible |
+| `0.3` | Very transparent | Ghost-like, barely visible |
+| `0.0` | Completely invisible | Element hidden but still takes space |
+
+**Where Opacity Applies:**
+
+| Element | What Gets Transparent |
+|---------|----------------------|
+| `Base.Opacity` | The ENTIRE window including all contents |
+| `TitleBox.Opacity` | Just the title label |
+| `StatusBox.Opacity` | Just the status text |
+| `Button.Opacity` | Just that specific button |
+| `TopBox.Opacity` | Just the top bar |
+| `TabControl.Opacity` | The tab area |
+| `ScriptBox.Opacity` | The script file list |
+
+**Important Notes:**
+- Window `Base.Opacity` affects EVERYTHING inside. Set to 0.5 and all buttons, text, etc. become 50% transparent too.
+- Individual element opacity stacks with window opacity. Window at 0.8 + button at 0.5 = button appears at 0.4 (0.8 × 0.5)
+- Use Alpha channel in colors for transparency of just the background color, not the whole element
+
+**Opacity vs Alpha (Color Transparency):**
+```json
+// This makes the ENTIRE button 50% transparent (background AND text):
+"Opacity": 0.5
+
+// This makes just the BACKGROUND 50% transparent (text stays solid):
+"BackColor": { "A": 128, "R": 255, "G": 0, "B": 0 }
+```
+
+---
+
+## Button Types Explained
+
+NL-X has THREE different types of buttons. Each has different properties.
+
+### 1. Standard Button (TButton)
+
+Used for: Execute, Clear, Open File, Execute File, Save File, Options, Attach, Close
+
+```json
+{
+  "Image": { "Path": "", "Online": false },
+  "Font": { "Name": "Segoe UI", "Size": 14.0 },
+  "BackColor": { "A": 255, "R": 60, "G": 60, "B": 60 },
+  "GradientColor": { "A": 255, "R": 30, "G": 30, "B": 30 },
+  "TextColor": { "A": 255, "R": 255, "G": 255, "B": 255 },
+  "Text": "Execute",
+  "Opacity": 1.0
+}
+```
+
+| Property | What It Does |
+|----------|--------------|
+| `Image` | Background image for the button (optional) |
+| `Font` | Font name and size for button text |
+| `BackColor` | Button background color (or TOP of gradient) |
+| `GradientColor` | BOTTOM of gradient (set A=0 to disable gradient) |
+| `TextColor` | Color of the button text |
+| `Text` | The text displayed on the button |
+| `Opacity` | Transparency of the entire button |
+
+**How Gradients Work:**
+
+Gradients create a smooth color transition on buttons. NL-X uses a **45-degree diagonal gradient** from top-left to bottom-right.
+
+```
+┌─────────────┐
+│ BackColor   │  ← Top-left corner starts with BackColor
+│      ↘      │
+│        ↘    │  ← Colors blend diagonally
+│          ↘  │
+│ GradientColor│  ← Bottom-right corner ends with GradientColor
+└─────────────┘
+```
+
+**Rules:**
+1. If `GradientColor.A` (Alpha) is greater than 0 → Gradient is shown
+2. If `GradientColor.A` is 0 → Solid `BackColor` is shown (no gradient)
+3. If `Image.Path` is set → Image is used instead of any colors
+
+**Example - Red to Dark Red Gradient:**
+```json
+"BackColor": { "A": 255, "R": 200, "G": 50, "B": 50 },
+"GradientColor": { "A": 255, "R": 100, "G": 20, "B": 20 }
+```
+
+**Example - Solid Color (No Gradient):**
+```json
+"BackColor": { "A": 255, "R": 60, "G": 60, "B": 60 },
+"GradientColor": { "A": 0, "R": 0, "G": 0, "B": 0 }
+```
+
+**Example - Purple to Blue Gradient:**
+```json
+"BackColor": { "A": 255, "R": 138, "G": 43, "B": 226 },
+"GradientColor": { "A": 255, "R": 65, "G": 105, "B": 225 }
+```
+
+### 2. Glyph Button (TGlyphButton)
+
+Used for: Minimize button (─), Close/Exit button (×)
+
+These are the small icon buttons in the top-right corner.
+
+```json
+{
+  "BackColor": { "A": 0, "R": 0, "G": 0, "B": 0 },
+  "GlyphColor": { "A": 255, "R": 255, "G": 255, "B": 255 },
+  "Opacity": 1.0
+}
+```
+
+| Property | What It Does |
+|----------|--------------|
+| `BackColor` | Background behind the icon (usually transparent) |
+| `GlyphColor` | Color of the icon symbol (─ or ×) |
+| `Opacity` | Transparency of the button |
+
+**Note:** You cannot change the icon symbol itself, only its color.
+
+### 3. Yield Button (TYieldButton)
+
+Used for: Script Hub button, ScriptHub Execute button
+
+**What is a "Yield" Button?**
+A yield button has TWO text states:
+- **Normal text** - Shown when button is idle
+- **Yield text** - Shown when button is processing/loading
+
+Example: Script Hub button shows "Script Hub" normally, but shows "Starting..." while the Script Hub window is loading.
+
+```json
+{
+  "Image": { "Path": "", "Online": false },
+  "Font": { "Name": "Segoe UI", "Size": 14.0 },
+  "BackColor": { "A": 255, "R": 60, "G": 60, "B": 60 },
+  "GradientColor": { "A": 255, "R": 30, "G": 30, "B": 30 },
+  "TextColor": { "A": 255, "R": 255, "G": 255, "B": 255 },
+  "TextNormal": "Script Hub",
+  "TextYield": "Starting...",
+  "Opacity": 1.0
+}
+```
+
+| Property | What It Does |
+|----------|--------------|
+| `TextNormal` | Text shown when button is ready/idle |
+| `TextYield` | Text shown when button is processing |
+| All others | Same as Standard Button |
+
+**Yield Buttons in NL-X:**
+
+| Button | TextNormal | TextYield | When Yield Shows |
+|--------|------------|-----------|------------------|
+| `Main.ScriptHubButton` | "Script Hub" | "Starting..." | While Script Hub window loads |
+| `ScriptHub.ExecuteButton` | "Execute" | "Executing..." | While script is running |
 
 ---
 
 ## Ace Editor (Complete Guide)
 
-The Ace editor is the code editing component in NL-X. It runs inside a WebView2 control, which means **you can do ANYTHING you would normally do in HTML/CSS/JavaScript**.
+### What is the Ace Editor?
 
-### File Locations
+The Ace Editor is the **code editing box** where you type your Lua scripts in the Main window. It's the big text area with syntax highlighting, line numbers, and code completion.
 
-**Application file:**
+**Important:** The Ace Editor is **NOT** customized through `theme-wpf.json`. It has its own separate file: `Ace.html`.
+
+### Why is it Separate?
+
+The Ace Editor is actually a web-based code editor (like VS Code's editor) running inside NL-X through a WebView2 component. This means:
+- It uses HTML, CSS, and JavaScript for styling
+- You have FULL control over how it looks
+- You can add animations, effects, custom fonts - anything web browsers support
+
+### File Location
+
+The Ace Editor file is located at:
 ```
 bin/Ace.html
 ```
 
-**Example file included in this documentation:**
+This is the file you edit to customize the code editor's appearance.
+
+### What You Can Customize
+
+| Element | What It Is |
+|---------|-----------|
+| Background | The editor's background color or image |
+| Text colors | Syntax highlighting for keywords, strings, comments, etc. |
+| Cursor | The blinking line where you type |
+| Selection | The highlight color when you select text |
+| Line numbers | The gutter on the left showing line numbers |
+| Scrollbar | The scrollbar appearance |
+| Active line | The highlight on the current line |
+| Font | The code font family and size |
+
+### What the Theme JSON Controls (Editor Section)
+
+The `Main.Editor` section in `theme-wpf.json` only controls TWO things:
+
+```json
+"Editor": {
+  "Light": false,
+  "FixPixel": { "A": 255, "R": 30, "G": 30, "B": 30 },
+  "Opacity": 1.0
+}
 ```
-documentation/Ace.html
-```
 
-> **Tip:** Check out the `Ace.html` example file in this documentation folder for a working reference!
+| Property | What It Does |
+|----------|--------------|
+| `Light` | `true` = light theme, `false` = dark theme (sets base Ace theme) |
+| `FixPixel` | A 1-pixel color fix for rendering alignment |
+| `Opacity` | Transparency of the entire editor container |
 
-### The Power of HTML
+**Everything else** (syntax colors, cursor, scrollbar, etc.) is controlled in `Ace.html`.
 
-Since Ace.html is a standard HTML file rendered in a Chromium-based WebView2, you have **full access to**:
+### The Power of HTML/CSS
+
+Since Ace.html is rendered in a Chromium-based browser, you have **full access to**:
 
 - **All HTML elements** - Add divs, images, buttons, anything
 - **All CSS properties** - Animations, transforms, filters, gradients, shadows
@@ -777,46 +1014,51 @@ editor.completers.push(customCompleter);
 | `one_dark` | Atom One Dark |
 | `gruvbox` | Retro groove |
 
-### C# API Reference
+### Required JavaScript Functions
 
-The `NLX.Controls.Ace` class provides these methods:
+**IMPORTANT:** Your Ace.html file MUST define these JavaScript functions for NL-X to work properly. These are called by NL-X to interact with the editor.
 
-```csharp
-// Properties
-bool AceLoaded { get; }              // True when editor is ready
-
-// Events
-event Action AceReady;               // Fired when editor loads
-
-// Methods
-void SetText(string text);           // Set editor content
-Task<string> GetTextAsync();         // Get editor content
-void SetOpacity(double opacity);     // Set transparency (0.0-1.0)
-void SetTheme(AceTheme theme);       // Light or Dark
-void AppendText(string text);        // Add text to end
-void GoToLine(int line);             // Scroll to line
-void EditorRefresh();                // Refresh display
-void UpdateSettings(AceSettings s);  // Update multiple settings
-void AddIntellisense(...);           // Add autocomplete entry
-void ShowSyntaxError(...);           // Show error marker
+```javascript
+// REQUIRED - NL-X calls these functions
+GetText = () => editor.getValue();           // Returns the code in the editor
+SetText = (x) => editor.setValue(x, -1);     // Sets the code in the editor
+ClearText = () => editor.setValue("");       // Clears all code
+SetTheme = (th) => editor.setTheme("ace/theme/" + th);  // Changes Ace theme
+SetOpacity = (o) => document.getElementById('editor').style.opacity = o;  // Sets transparency
 ```
 
-### AceSettings Class
+If these functions are missing, NL-X won't be able to get or set your script code!
 
-```csharp
-var settings = new AceSettings {
-    ReadOnly = false,
-    AutoIndent = true,
-    Folding = true,
-    FontLigatures = false,
-    Links = true,
-    MinimapEnabled = false,
-    LineHeight = 20,
-    FontSize = 14,
-    FontFamily = "Consolas",
-    RenderWhitespace = "none"  // "none", "all", "boundary"
-};
-editor.UpdateSettings(settings);
+### Minimum Required Ace.html
+
+Here's the absolute minimum Ace.html needs to work:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    html, body { margin: 0; padding: 0; width: 100%; height: 100%; }
+    #editor { position: absolute; top: 0; right: 0; bottom: 0; left: 0; }
+  </style>
+  <script src="ace/ace.js"></script>
+</head>
+<body>
+  <pre id="editor"></pre>
+  <script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.session.setMode("ace/mode/lua");
+    
+    // REQUIRED FUNCTIONS - Do not remove!
+    GetText = () => editor.getValue();
+    SetText = (x) => editor.setValue(x, -1);
+    ClearText = () => editor.setValue("");
+    SetTheme = (th) => editor.setTheme("ace/theme/" + th);
+    SetOpacity = (o) => document.getElementById('editor').style.opacity = o;
+  </script>
+</body>
+</html>
 ```
 
 ### Complete Custom Theme Example
@@ -914,7 +1156,273 @@ See `theme-wpf.json` and `Ace.html` for a complete working example with all prop
 3. **Gradient buttons** use `BackColor` as top and `GradientColor` as bottom
 4. **Test incrementally** - change one section at a time
 5. **Backup your theme** before making major changes
-
 6. **Ace.html is just HTML** - use any CSS/JS technique you know
 
+---
 
+## All Customizable Strings
+
+This section documents **ALL customizable strings** in NL-X - every piece of text you can change.
+
+---
+
+### Load Section Strings
+
+These strings appear on the Loader window and KeyPage.
+
+#### StatusBox.Text
+```json
+"StatusBox": {
+  "Text": "Starting up..."
+}
+```
+- **Where:** Center of Loader window
+- **What it shows:** The initial status message when NL-X opens
+- **Changes to:** Updates automatically during loading process
+
+#### TitleBox.Text
+```json
+"TitleBox": {
+  "Text": "NL-X - Loader"
+}
+```
+- **Where:** Top bar of the Loader window
+- **What it shows:** Window title during loading
+
+#### WelcomeLabel.Text
+```json
+"WelcomeLabel": {
+  "Text": "Welcome to NL-X"
+}
+```
+- **Where:** KeyPage window, above the key input box
+- **What it shows:** A welcome/greeting message
+
+**Loading Flow:**
+```
+Your StatusBox.Text ("Initializing...")
+         ↓
+    [checks for updates]
+         ↓
+    [downloads files]
+         ↓
+    [validates credentials if saved]
+         ↓
+    Main window opens
+```
+
+---
+
+### Main Section Strings
+
+These strings appear on the Main window.
+
+#### TitleBox.FormatString
+```json
+"TitleBox": {
+  "FormatString": "NL-X - {version}"
+}
+```
+- **Where:** Top bar of Main window
+- **Special:** Use `{version}` and it gets replaced with the actual NL-X version number
+- **Example:** `"My Executor - {version}"` → `"My Executor - 1.0.8"`
+
+#### RightClickStrings
+
+Text for the context menu when you right-click a script in the script list:
+
+```json
+"RightClickStrings": {
+  "Execute": "Execute",
+  "LoadToEditor": "Load to Editor",
+  "Refresh": "Refresh"
+}
+```
+
+| String | Default | What It Does |
+|--------|---------|--------------|
+| `Execute` | "Execute" | Runs the selected script |
+| `LoadToEditor` | "Load to Editor" | Opens script in the editor |
+| `Refresh` | "Refresh" | Reloads the script file list |
+
+#### Button Text
+
+Every button on the Main window has customizable text:
+
+| Button | JSON Property | Default Text |
+|--------|---------------|--------------|
+| Execute | `ExecuteButton.Text` | "Execute" |
+| Clear | `ClearButton.Text` | "Clear" |
+| Open File | `OpenFileButton.Text` | "Open File" |
+| Execute File | `ExecuteFileButton.Text` | "Execute File" |
+| Save File | `SaveFileButton.Text` | "Save File" |
+| Options | `OptionsButton.Text` | "Options" |
+| Attach | `AttachButton.Text` | "Attach" |
+
+#### ScriptHubButton (Yield Button)
+```json
+"ScriptHubButton": {
+  "TextNormal": "Script Hub",
+  "TextYield": "Starting..."
+}
+```
+- `TextNormal` - Shows when button is ready
+- `TextYield` - Shows while Script Hub is loading
+
+---
+
+### ScriptHub Section Strings
+
+#### TitleBox.Text
+```json
+"TitleBox": {
+  "Text": "NL-X - Script Hub"
+}
+```
+- **Where:** Top bar of Script Hub window
+
+#### ExecuteButton (Yield Button)
+```json
+"ExecuteButton": {
+  "TextNormal": "Execute",
+  "TextYield": "Executing..."
+}
+```
+- `TextNormal` - Shows when ready
+- `TextYield` - Shows while script is running
+
+#### CloseButton.Text
+```json
+"CloseButton": {
+  "Text": "Close"
+}
+```
+
+---
+
+### Non-Customizable Strings
+
+These messages appear automatically and **CANNOT** be changed via theme:
+
+**Loader/KeyPage:**
+- "NL-X - Please enter a key!" (empty key submitted)
+- "NL-X - Please enter a valid key!" (invalid key)
+- "NL-X - Your key has expired, get a new one"
+- "NL-X - Invalid HWID, please create a ticket for help!"
+- "NL-X - Connection to servers failed! Please try a VPN!"
+
+**Main Window Title (during attach):**
+- "NL-X - Roblox wasn't found!"
+- "NL-X - Attaching..."
+- "NL-X - Attaching... (Auto Attach)"
+- "NL-X - Please attach first!"
+- "NL-X - Setting up execution environment..."
+- "NL-X - Waiting for you to join a game..."
+- "NL-X - Attached"
+- "NL-X - Already attached"
+- "NL-X - Not yet updated for this Roblox version..."
+- "NL-X - Roblox closed"
+
+---
+
+### String Examples
+
+**Gaming Theme:**
+```json
+"Load": {
+  "StatusBox": { "Text": "Loading..." },
+  "TitleBox": { "Text": "GameExecutor - Loading" },
+  "WelcomeLabel": { "Text": "Ready to play?" }
+}
+```
+
+**Anime Theme:**
+```json
+"Load": {
+  "StatusBox": { "Text": "Powering up..." },
+  "TitleBox": { "Text": "NL-X :: Awakening" },
+  "WelcomeLabel": { "Text": "Welcome, Warrior!" }
+},
+"Main": {
+  "TitleBox": { "FormatString": "Ninja Executor - {version}" },
+  "ExecuteButton": { "Text": "Unleash!" },
+  "AttachButton": { "Text": "Connect" }
+}
+```
+
+---
+
+## Troubleshooting
+
+### Theme Not Loading
+1. Make sure file is named exactly `theme-wpf.json`
+2. Make sure it's in the `bin` folder
+3. Check JSON syntax - use a JSON validator
+4. Make sure you have premium access
+
+### Colors Not Showing
+- Check Alpha (A) value is not 0 - that makes it invisible
+- Check RGB values are in range 0-255
+
+### Gradient Not Working
+- `GradientColor.A` must be greater than 0
+- If A is 0, solid color is used instead
+
+### Image Not Loading
+- For online images, set `"Online": true`
+- Check URL is accessible
+- GIF URLs must end in .gif or contain .gif?
+
+### Text Not Changing
+- Some messages are hardcoded (see Non-Customizable Strings above)
+- Make sure you're editing the right section (Load vs Main)
+
+### Premium/Key Pages Not Visible
+- These only show if you haven't saved credentials
+- Run `NL-X.exe -reset` to clear saved login
+- Log in without checking "Remember Me" to see these pages
+
+### Ace Editor Not Working
+- Make sure `bin/Ace.html` exists
+- Make sure the required JavaScript functions are defined (GetText, SetText, ClearText, SetTheme, SetOpacity)
+- Check browser console for JavaScript errors
+- Make sure `bin/ace/ace.js` exists
+
+### Fonts Not Applying
+- Font must be installed on the user's system
+- Check spelling of font name exactly
+- Try a common font like "Segoe UI" to test
+
+---
+
+## Quick Reference
+
+### Color Values
+- **Transparent:** `{ "A": 0, "R": 0, "G": 0, "B": 0 }`
+- **White:** `{ "A": 255, "R": 255, "G": 255, "B": 255 }`
+- **Black:** `{ "A": 255, "R": 0, "G": 0, "B": 0 }`
+- **Red:** `{ "A": 255, "R": 255, "G": 0, "B": 0 }`
+- **Green:** `{ "A": 255, "R": 0, "G": 255, "B": 0 }`
+- **Blue:** `{ "A": 255, "R": 0, "G": 0, "B": 255 }`
+- **50% Transparent Black:** `{ "A": 128, "R": 0, "G": 0, "B": 0 }`
+
+### Files You Need
+| File | Purpose |
+|------|---------|
+| `bin/theme-wpf.json` | Main theme configuration (colors, fonts, text, images) |
+| `bin/Ace.html` | Code editor styling (syntax colors, cursor, scrollbar) |
+| `bin/ace/ace.js` | Ace editor library (don't modify) |
+
+### What Controls What
+| Want to change... | Edit this... |
+|-------------------|--------------|
+| Window backgrounds | `theme-wpf.json` → `Base.Image` or `Base.BackColor` |
+| Button colors | `theme-wpf.json` → `[ButtonName].BackColor/GradientColor` |
+| Button text | `theme-wpf.json` → `[ButtonName].Text` |
+| Title text | `theme-wpf.json` → `TitleBox.Text` or `TitleBox.FormatString` |
+| Code editor colors | `Ace.html` → CSS styles |
+| Syntax highlighting | `Ace.html` → `.ace_keyword`, `.ace_string`, etc. |
+
+---
+
+*End of NL-X Theme Documentation*
